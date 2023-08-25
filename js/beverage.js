@@ -59,7 +59,7 @@ const createElement = (name, index, callback) => {
   noitemElement.setAttribute("data-index", index);
 
   element.innerHTML = name;
-  element.classList.add("button");
+  element.classList.add("one-item");
   element.appendChild(buyButton);
   element.appendChild(noitemElement);
   element.setAttribute("data-index", index);

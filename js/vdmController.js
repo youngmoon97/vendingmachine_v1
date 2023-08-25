@@ -35,3 +35,8 @@ export const vdmController = {
     }
   },
 };
+export const render = () => {
+  document.querySelector("#current-money").innerHTML =
+    vdmController.currentMoney.toString();
+};
+render();

@@ -5,6 +5,7 @@
 }
 
 h1 {
+  text-align: center;
   color: #323330;
 }
 div {
@@ -41,9 +42,16 @@ div#current-money {
 .money-box {
     display: flex;
 }
-.leds {
-    display: flex;
-}
+ .led {
+  text-align: center;
+    margin: 0;
+} 
 .textarea{
     height: 150px;
+}
+.panel.outlet{
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
 }

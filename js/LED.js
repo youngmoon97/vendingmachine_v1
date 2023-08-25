@@ -74,7 +74,7 @@ const createElement = (name, index) => {
   const element = document.createElement("div");
 
   element.innerHTML = name;
-  element.classList.add("button");
+  element.classList.add("led");
   element.setAttribute("data-index", index);
   return element;
 };

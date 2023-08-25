@@ -1,6 +1,5 @@
 import * as moneyReturn from "./moneyReturn.js";
 import * as vdmController from "./vdmController.js";
-
 //money
 // const index = prompt("enter the index");
 export const money = {
@@ -69,6 +68,7 @@ const onClickMoney = (event) => {
   const inputMoney = moneyVALUE[itemIndex];
 
   money.insertMoneyBtn(inputMoney);
+  vdmController.render();
 };
 
 addMoneyToBox();
