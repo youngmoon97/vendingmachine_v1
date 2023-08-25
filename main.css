@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #323330;
+}
+div {
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+.hide {
+  display: none;
+}
+
+.container {
+    margin: 50;
+  height: 100vh;
+}
+.panel.rack{
+    display: flex;
+}
+div#current-money {
+    padding: 10px;
+}
+.panel{
+    padding: 50px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.button{
+    text-align: center;
+}
+.panel.vertical{
+    display: flex;
+}
+.money-box {
+    display: flex;
+}
+.leds {
+    display: flex;
+}
+.textarea{
+    height: 150px;
+}
