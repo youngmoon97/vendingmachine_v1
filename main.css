@@ -25,6 +25,7 @@ div {
     display: flex;
 }
 div#current-money {
+  display: flex;
     padding: 10px;
 }
 .panel{
@@ -35,17 +36,16 @@ div#current-money {
 }
 .button{
     text-align: center;
+    border-style: initial;
 }
 .panel.vertical{
     display: flex;
 }
-.money-box {
-    display: flex;
-}
- .led {
+ /* .led {
   text-align: center;
     margin: 0;
-} 
+    color: darkgray;
+}  */
 .textarea{
     height: 150px;
 }
@@ -54,4 +54,25 @@ div#current-money {
   border: 1px solid #000;
   border-radius: 10px;
   background-color: #fff;
+  height: 200px;
+  resize: none;
+}
+.popup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup>.panel {
+  padding: 30px;
+}
+.hide {
+  display: none;
+}
+.panel .money-box{
+  display: flex;
 }

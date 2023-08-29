@@ -1,42 +1,66 @@
 import * as vdmController from "./vdmController.js";
 import * as LED from "./LED.js";
+import * as money from "./money.js";
 //vdm003
 export const moneyReturn = {
-  moneyreturnBtn: function moneyreturnBtn() {
+  moneyreturnBtn: function moneyreturnBtn(currentMoney) {
     // 지폐 있으면 반환
-    if (hasPaper) {
+    if (money.money.hasPaper) {
       let returnPaper = 1000;
-      vdmController.vdmController.currentMoney -= returnPaper;
-      return returnPaper;
+      currentMoney -= returnPaper;
+      vdmController.vdmController.returnMoneys.push(returnPaper);
+      money.money.hasPaper = false;
     }
     // 동전 반환
     // 순차반환
-    let n = vdmController.vdmController.currentMoney;
     let yesMoney = [];
-    let cnt = 0;
     // 있는 동전 확인
-    LED.noCoinLEDs.forEach((element, index) => {
-      if (LED.noCoinLEDs[index] == false) {
-        noCoin.push(element);
+    LED.LED.noMoneyLEDsOnOff();
+    LED.LED.noMoneyLEDs.forEach((element, index) => {
+      if (element == false) {
+        yesMoney.push(money.money.moneyVALUE[index]);
       }
     });
-    //TODO-점검
-    yesMoney.reverse.forEach((element) => {
-      while (n >= element) {
-        cnt = n / element;
-        n %= element;
+    yesMoney.reverse().forEach((element) => {
+      while (currentMoney >= element) {
+        currentMoney -= element;
+        money.money.moneyVALUE.forEach((eachMoney, index) => {
+          if (eachMoney == element) {
+            money.money.eachAmountOfMoneys[index] -= 1;
+          }
+        });
+        vdmController.vdmController.currentMoney = currentMoney;
+        vdmController.render();
         vdmController.vdmController.returnMoneys.push(element); //반환구 전해줘야함
       }
     });
+
+    moneyReternToOutlet();
   },
+
   // 투입 금액 반환
-  inputMoneyReturn: function inputMoneyReturn(inputMoney, hasPaper) {
-    // console.log(inputMoney);
-    if (hasPaper) {
-      hasPaper = false;
-      console.log(hasPaper);
-    }
+  inputMoneyReturn: function inputMoneyReturn(inputMoney) {
     vdmController.vdmController.returnMoneys.push(inputMoney);
-    // console.log(vdmController.returnMoneys);
+    moneyReternToOutlet();
+
+    // 금액반환구에 표시
   },
+};
+
+const resultBaseElement = document.querySelector("#money-return");
+
+const onClickMoneyReturn = () => {
+  console.log("ClickReturnBtn");
+  const currentMoney = document.querySelector("#current-money").innerHTML;
+  moneyReturn.moneyreturnBtn(currentMoney);
+};
+resultBaseElement.addEventListener("click", onClickMoneyReturn);
+
+const moneyReternToOutlet = () => {
+  const outletElement = document.querySelector("#money-outlet");
+  vdmController.vdmController.returnMoneys.reverse().forEach((returnMoney) => {
+    outletElement.append(`\n${returnMoney}`);
+  });
+  outletElement.append(`\n----------------`);
+  vdmController.vdmController.returnMoneys = [];
 };

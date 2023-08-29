@@ -1,4 +1,6 @@
 import * as moneyReturn from "./moneyReturn.js";
+import * as LED from "./LED.js";
+import { money } from "./money.js";
 
 //vdm004
 export const vdmController = {
@@ -10,10 +12,12 @@ export const vdmController = {
   returnMoneys: [],
   //초기화
   init: function init() {
-    currentMoney = 0;
-    coinLEDsOnOff();
-    fullPaperLEDOnOff();
-    noItemLEDsOnOff();
+    vdmController.currentMoney = 0;
+    LED.LED.noMoneyLEDsOnOff();
+    LED.LED.fullMoneyLEDsOnOff();
+    LED.LED.buyLedsOnOff();
+    LED.LED.noItemLEDsOnOff();
+    console.log("init");
   },
   //투입 금액 계산
   moneyAdd: function moneyAdd(inputMoney) {
@@ -39,4 +43,6 @@ export const render = () => {
   document.querySelector("#current-money").innerHTML =
     vdmController.currentMoney.toString();
 };
+
 render();
+// init();

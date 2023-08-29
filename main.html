@@ -23,17 +23,32 @@
         <hr>
         <div id="money-return" class="button">금액반환하기</div>
         <hr>
-        <textarea id="money-outlet" class="outlet panel" title="금액반환구">금액반환구</textarea>
+        <textarea readonly="readonly" id="money-outlet" class="outlet panel" title="금액반환구">금액반환구</textarea>
       </div>
       <div class="panel">
-        <div class="money-box"></div>
+        <div class="panel money-box"></div>
         <hr>
-        <div class="leds"></div>
+        <div class="noleds" data-index="0">10원 동전 없음</div>
+        <div class="noleds" data-index="1">50원 동전 없음</div>
+        <div class="noleds" data-index="2">100원 동전 없음</div>
+        <div class="noleds" data-index="3">500원 동전 없음</div>
+        <div class="fullleds" data-index="0">10원 동전 꽉 참</div>
+        <div class="fullleds" data-index="1">50원 동전 꽉 참</div>
+        <div class="fullleds" data-index="2">100원 동전 꽉 참</div>
+        <div class="fullleds" data-index="3">500원 동전 꽉 참</div>
+        <div class="fullleds" data-index="4">1000원 지폐 꽉 참</div>
       </div>
       <div class="panel">
-        <textarea id="beverage-outlet" class="panel">음료반환구</textarea>
+        <textarea readonly="readonly" id="beverage-outlet" class="outlet panel">음료반환구</textarea>
         <hr>
         <div id="get-beverage" class="button">음료회수하기</div>
+      </div>
+      <div id="money-base" class="popup hide">
+        <div class="panel"></div>
+      </div>
+
+      <div id="result-base" class="popup hide">
+        <div class="panel button"></div>
       </div>
     </div>
   </div>

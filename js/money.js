@@ -1,35 +1,42 @@
 import * as moneyReturn from "./moneyReturn.js";
 import * as vdmController from "./vdmController.js";
+import * as LED from "./LED.js";
+
 //money
 // const index = prompt("enter the index");
 export const money = {
-  eachAmountOfMoneys: [10, 20, 30, 40, 99],
+  eachAmountOfMoneys: [100, 0, 30, 98, 97],
   moneyVALUE: [10, 50, 100, 500, 1000],
   inputMoney: 0,
   hasPaper: false,
 
   //금액 투입
   insertMoneyBtn: function insertMoneyBtn(inputMoney) {
-    // console.log(inputMoney);
     this.moneyVALUE.forEach((value, index) => {
-      // console.log(value);
       if (value == inputMoney) {
         let whatCoin = index;
-        // console.log(whatCoin);
-        //1000원 들어옴
+
         if (index == 4) {
-          this.hasPaper = true;
-          // console.log(this.hasPaper);
+          if (this.hasPaper) {
+            console.log(
+              `${money.moneyVALUE[index]}원은 한번만 투입가능합니다.`
+            );
+            moneyReturn.moneyReturn.inputMoneyReturn(1000);
+            return 0;
+          } else {
+            this.hasPaper = true;
+          }
         }
         // 해당 동전 꽉 찻을때 반환
         if (this.eachAmountOfMoneys[whatCoin] == 100) {
-          console.log("full");
+          // 꽉찼으니깐 반환해줘야히ㅏㄴ
           moneyReturn.moneyReturn.inputMoneyReturn(inputMoney, this.hasPaper);
         } else {
           // 현재금액에 더하기
           vdmController.vdmController.moneyAdd(inputMoney);
           this.eachAmountOfMoneys[whatCoin] += 1;
-          // console.log(`this.eachAmountOfMoneys : ${this.eachAmountOfMoneys}`);
+          console.log(this.eachAmountOfMoneys);
+          LED.fullLEDColorOn();
         }
       }
     });
@@ -39,7 +46,6 @@ export const money = {
   savePaper: function savePaper() {
     this.eachAmountOfMoneys[4] += 1;
     this.hasPaper = false;
-    // console.log(this.eachAmountOfMoneys);
   },
 };
 
@@ -52,6 +58,7 @@ const addMoneyToBox = () => {
     moneyElement.appendChild(moneyVals);
   });
 };
+
 const createElement = (name, index, callback) => {
   const element = document.createElement("div");
 
@@ -62,10 +69,11 @@ const createElement = (name, index, callback) => {
 
   return element;
 };
+
 const onClickMoney = (event) => {
   const targetElement = event.target;
   const itemIndex = targetElement.getAttribute("data-index");
-  const inputMoney = moneyVALUE[itemIndex];
+  const inputMoney = money.moneyVALUE[itemIndex];
 
   money.insertMoneyBtn(inputMoney);
   vdmController.render();
