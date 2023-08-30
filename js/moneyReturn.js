@@ -1,27 +1,44 @@
 import * as vdmController from "./vdmController.js";
 import * as LED from "./LED.js";
 import * as money from "./money.js";
+import * as beverage from "./beverage.js";
 //vdm003
 export const moneyReturn = {
   moneyreturnBtn: function moneyreturnBtn(currentMoney) {
     // 지폐 있으면 반환
     if (money.money.hasPaper) {
+      console.log("1 : " + money.money.hasPaper);
+      console.log("2 : " + !beverage.beverage.isServiced);
       let returnPaper = 1000;
       currentMoney -= returnPaper;
       vdmController.render();
       vdmController.vdmController.returnMoneys.push(returnPaper);
       vdmController.vdmController.currentMoney = currentMoney;
       vdmController.render();
+      // console.log("1 : " + money.money.hasPaper);
       money.money.hasPaper = false;
+      // console.log("2 : " + money.money.hasPaper);
     }
+    // else if (!beverage.beverage.isServiced) {
+    //   console.log("asdad");
+    //   let returnPaper = 1000;
+    //   currentMoney -= returnPaper;
+    //   vdmController.render();
+    //   vdmController.vdmController.returnMoneys.push(returnPaper);
+    //   vdmController.vdmController.currentMoney = currentMoney;
+    //   vdmController.render();
+    // }
+
     // 동전 반환
     // 순차반환
     let yesMoney = [];
     // 있는 동전 확인
     LED.LED.noMoneyLEDsOnOff();
     LED.LED.noMoneyLEDs.forEach((element, index) => {
+      console.log(index);
       if (element == false) {
         yesMoney.push(money.money.moneyVALUE[index]);
+        console.log("yesmoney: " + yesMoney);
       }
     });
     yesMoney.reverse().forEach((element) => {
@@ -57,6 +74,8 @@ export const moneyReturn = {
       }
     });
     LED.buyItemLEDColorOn();
+    LED.noLEDColorOn();
+    LED.fullLEDColorOn();
     moneyReternToOutlet();
   },
 
@@ -64,7 +83,9 @@ export const moneyReturn = {
   inputMoneyReturn: function inputMoneyReturn(inputMoney) {
     vdmController.vdmController.returnMoneys.push(inputMoney);
     moneyReternToOutlet();
-
+    LED.buyItemLEDColorOn();
+    LED.noLEDColorOn();
+    LED.fullLEDColorOn();
     // 금액반환구에 표시
   },
 };

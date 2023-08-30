@@ -4,10 +4,41 @@ import * as vdmController from "./vdmController.js";
 
 export const beverage = {
   beverages: [
-    { idx: 0, name: "Coke", price: "1500", EA: 10 },
-    { idx: 1, name: "Coffee", price: "3000", EA: 2 },
-    { idx: 2, name: "Tea", price: "2600", EA: 0 },
-    { idx: 3, name: "Water", price: "300", EA: 4 },
+    {
+      idx: 0,
+      name: "Coke",
+      price: "1500",
+      EA: 10,
+      pic: "../image/coke.jpg",
+    },
+    {
+      idx: 1,
+      name: "Coffee",
+      price: "3000",
+      EA: 0,
+      pic: "../image/coffee.jpg",
+    },
+    {
+      idx: 2,
+      name: "Tea",
+      price: "2600",
+      EA: 2,
+      pic: "../image/tea.jpg",
+    },
+    {
+      idx: 3,
+      name: "Water",
+      price: "260",
+      EA: 4,
+      pic: "../image/water.jpg",
+    },
+    // {
+    //   idx: 4,
+    //   name: "cyder",
+    //   price: "700",
+    //   EA: 4,
+    //   pic: "../image/cyder.jpg",
+    // },
   ],
 
   beverageOutlet: [],
@@ -20,6 +51,7 @@ export const beverage = {
     } else {
       item.EA -= 1;
       beverage.beverageOutlet.push(item.name);
+      alert(`${item.name}을 구매하였습니다.\n음료반환구를 확인해주세요!`);
       itemToOutlet();
       if (money.hasPaper) {
         money.savePaper();
@@ -41,7 +73,13 @@ export const beverage = {
       .split(" ");
     //alert
     beverageList.pop();
-    alert(`${beverageList}을 회수합니다.`);
+    console.log(beverageList);
+    if (beverageList.length === 0) {
+      alert("회수할 음료가 없습니다.");
+    } else {
+      alert(`${beverageList}을 회수합니다.`);
+    }
+
     console.log(beverageList);
   },
 };
@@ -51,7 +89,9 @@ const addItemToRack = () => {
 
   beverage.beverages.forEach((item, index) => {
     const itemElement = createElement(
-      `${item.name}<br>${item.price}`,
+      item.pic,
+      item.name,
+      item.price,
       index,
       onClickItem
     );
@@ -63,10 +103,11 @@ const addItemToRack = () => {
   });
 };
 
-const createElement = (name, index, onClickItem) => {
+const createElement = (pic, name, price, index, onClickItem) => {
   const element = document.createElement("div");
   const buyButton = document.createElement("div");
   const noitemElement = document.createElement("div");
+  const img = document.createElement("img");
 
   buyButton.innerText = "구매";
   buyButton.classList.add("buyitem");
@@ -75,12 +116,21 @@ const createElement = (name, index, onClickItem) => {
 
   noitemElement.innerText = "품절";
   noitemElement.classList.add("noitem");
+  noitemElement.style.display = "none";
   noitemElement.setAttribute("data-index", index);
 
-  element.innerHTML = name;
+  img.innerHTML = "";
+  img.classList.add("image");
+  img.src = pic;
+  img.width = 200;
+  img.setAttribute("data-index", index);
+
+  element.innerHTML = `${name}<br>${price}원`;
   element.classList.add("items");
+  element.appendChild(img);
   element.appendChild(buyButton);
   element.appendChild(noitemElement);
+
   element.setAttribute("data-index", index);
 
   return element;
@@ -93,8 +143,8 @@ const onClickItem = (event) => {
     vdmController.vdmController.currentMoney <
     beverage.beverages[itemIndex].price
   ) {
-    alert("금액을 부족합니다!");
-    console.log("금액을 부족합니다!");
+    alert("금액이 부족합니다!");
+    console.log("금액이 부족합니다!");
     return 0;
   }
   beverage.buyBeverageBtn(itemIndex);

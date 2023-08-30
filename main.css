@@ -18,6 +18,7 @@ div {
 }
 
 .container {
+  padding: 40px;
     margin: 50;
   height: 100vh;
 }
@@ -72,8 +73,103 @@ div#current-money {
   display: none;
 }
 .panel .money-box{
+  padding: 20px;
   display: flex;
 }
 .items{
+  border-radius: 10px;
+  border-style: double;
   text-align: center;
+}
+.buyitem{
+    border-radius: 10px;
+  border-style: inherit;
+}
+.buyitem:active{
+ transform: scale(1.5);
+}
+.buyitem:hover{
+ letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f8e6e0;
+    color: #2e2c2c;
+}
+.noitem{
+  border-style: inherit;
+  animation: blink 2s linear infinite;
+}
+.money-value:active{
+  transform: scale(1.5);
+}
+.money-value:hover{
+letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f8e6e0;
+    color: #2e2c2c;
+}
+.money-value{
+    border-radius: 10px;
+padding: 5px;
+  background-color: #f8e6e0;
+    color: #2e2c2c;
+  border: 3px solid #f8e6e0;
+    color: #2e2c2c;
+}
+.money-return:active{
+  transform: scale(1.5);
+}
+.money-return:hover{
+letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f8e6e0;
+    color: #2e2c2c;
+}
+.money-return{
+    border-radius: 10px;
+
+  background-color: #f8e6e0;
+    color: #2e2c2c;
+  border: 3px solid #f8e6e0;
+    color: #2e2c2c;
+}
+.get-beverage:active{
+  transform: scale(1.5);
+}
+.get-beverage:hover{
+letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f8e6e0;
+    color: #2e2c2c;
+}
+.get-beverage{
+    border-radius: 10px;
+
+  background-color: #f8e6e0;
+    color: #2e2c2c;
+  border: 3px solid #f8e6e0;
+    color: #2e2c2c;
+    
+}
+.money-outlet{
+  margin-top: 10%;
+  margin-top: 10%;
+}
+.noleds{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.fullleds{
+  margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+@keyframes blink{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
 }

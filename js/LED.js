@@ -50,11 +50,14 @@ export const noLEDColorOn = () => {
   LED.noMoneyLEDsOnOff();
   const noLEDElements = document.querySelectorAll(".noleds");
   noLEDElements.forEach((element, index) => {
+    element.style.color = "black";
+    element.style.setProperty("animation", "");
     if (
       LED.noMoneyLEDs[index] == true &&
       element.getAttribute("data-index") == index
     ) {
       element.style.color = "red";
+      element.style.setProperty("animation", "blink 2s step-end infinite");
     }
   });
 };
@@ -62,11 +65,14 @@ export const fullLEDColorOn = () => {
   LED.fullMoneyLEDsOnOff();
   const fullLEDElements = document.querySelectorAll(".fullleds");
   fullLEDElements.forEach((element, index) => {
+    element.style.color = "black";
+    element.style.setProperty("animation", "");
     if (
       LED.fullMoneyLEDs[index] == true &&
       element.getAttribute("data-index") == index
     ) {
       element.style.color = "red";
+      element.style.setProperty("animation", "blink 2s step-end infinite");
     }
   });
 };
@@ -74,18 +80,29 @@ export const noItemLEDColorOn = () => {
   LED.noItemLEDsOnOff();
   const noitemLEDElements = document.querySelectorAll(".noitem");
   const itemsElements = document.querySelectorAll(".items");
+  const buyitemLEDElements = document.querySelectorAll(".buyitem");
   noitemLEDElements.forEach((element, index) => {
     if (
       LED.noItemLEDs[index] == true &&
       element.getAttribute("data-index") == index
     ) {
       element.style.color = "red";
+      element.style.fontWeight = 1000;
+      element.style.display = "block";
       itemsElements.forEach((item) => {
         if (
           LED.noItemLEDs[index] == true &&
           item.getAttribute("data-index") == index
         ) {
           item.style.backgroundColor = "gray";
+          buyitemLEDElements.forEach((buyBtn) => {
+            if (
+              LED.noItemLEDs[index] == true &&
+              buyBtn.getAttribute("data-index") == index
+            ) {
+              buyBtn.style.display = "none";
+            }
+          });
         }
       });
       // itemsElements.item.style.backgroudColor = "blue";
@@ -99,12 +116,15 @@ export const buyItemLEDColorOn = () => {
   const buyitemLEDElements = document.querySelectorAll(".buyitem");
   buyitemLEDElements.forEach((element, index) => {
     element.style.color = "black";
+    element.style.setProperty("animation", "");
     if (
       LED.buyLEDs[index] == true &&
       element.getAttribute("data-index") == index
     ) {
       if (LED.noItemLEDs[index] == false) {
         element.style.color = "blue";
+        element.style.fontWeight = 1000;
+        element.style.setProperty("animation", "blink 1s step-end infinite");
       }
     }
   });
