@@ -5,7 +5,7 @@ import * as LED from "./LED.js";
 //money
 // const index = prompt("enter the index");
 export const money = {
-  eachAmountOfMoneys: [100, 0, 30, 98, 97],
+  eachAmountOfMoneys: [20, 30, 40, 50, 0],
   moneyVALUE: [10, 50, 100, 500, 1000],
   inputMoney: 0,
   hasPaper: false,
@@ -16,8 +16,11 @@ export const money = {
       if (value == inputMoney) {
         let whatCoin = index;
 
-        if (index == 4) {
+        if (whatCoin == 4 && this.eachAmountOfMoneys[whatCoin] < 100) {
           if (this.hasPaper) {
+            alert(
+              `${money.moneyVALUE[index]}원은 한번만 투입가능합니다.\n반환하겠습니다.`
+            );
             console.log(
               `${money.moneyVALUE[index]}원은 한번만 투입가능합니다.`
             );
@@ -29,12 +32,16 @@ export const money = {
         }
         // 해당 동전 꽉 찻을때 반환
         if (this.eachAmountOfMoneys[whatCoin] == 100) {
-          // 꽉찼으니깐 반환해줘야히ㅏㄴ
           moneyReturn.moneyReturn.inputMoneyReturn(inputMoney, this.hasPaper);
+          alert(`${inputMoney}원 보관함이 꽉 찼습니다. 반환하겠습니다.`);
+          console.log(`${inputMoney}원이 꽉 찼습니다. 반환하겠습니다.`);
         } else {
           // 현재금액에 더하기
           vdmController.vdmController.moneyAdd(inputMoney);
-          this.eachAmountOfMoneys[whatCoin] += 1;
+          if (whatCoin != 4) {
+            this.eachAmountOfMoneys[whatCoin] += 1;
+          }
+          LED.buyItemLEDColorOn();
           console.log(this.eachAmountOfMoneys);
           LED.fullLEDColorOn();
         }
@@ -46,6 +53,8 @@ export const money = {
   savePaper: function savePaper() {
     this.eachAmountOfMoneys[4] += 1;
     this.hasPaper = false;
+    LED.fullLEDColorOn();
+    console.log("Paper" + this.eachAmountOfMoneys);
   },
 };
 

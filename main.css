@@ -29,6 +29,7 @@ div#current-money {
     padding: 10px;
 }
 .panel{
+  text-align: center;
     padding: 50px;
   border: 1px solid #000;
   border-radius: 10px;
@@ -36,16 +37,13 @@ div#current-money {
 }
 .button{
     text-align: center;
-    border-style: initial;
+    border-width: 1px;
+    border-style: inherit;
 }
 .panel.vertical{
     display: flex;
 }
- /* .led {
-  text-align: center;
-    margin: 0;
-    color: darkgray;
-}  */
+
 .textarea{
     height: 150px;
 }
@@ -75,4 +73,7 @@ div#current-money {
 }
 .panel .money-box{
   display: flex;
+}
+.items{
+  text-align: center;
 }

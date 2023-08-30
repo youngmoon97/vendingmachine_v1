@@ -1,4 +1,5 @@
 import * as LED from "./LED.js";
+import { money } from "./money.js";
 import * as vdmController from "./vdmController.js";
 
 export const beverage = {
@@ -12,28 +13,37 @@ export const beverage = {
   beverageOutlet: [],
 
   buyBeverageBtn: function buyBeverageBtn(itemIndex) {
+    const item = this.beverages[itemIndex];
     if (LED.LED.noItemLEDs[itemIndex] == true) {
+      alert("품절되어 구매할 수 없습니다.");
       console.log("품절되어 구매할 수 없습니다.");
     } else {
-      this.beverages[itemIndex].EA -= 1;
-      const item = this.beverages[itemIndex];
-      // 음료 소진
-      if (this.beverages[itemIndex].EA == 0) {
-        LED.LED.noItemLEDsOnOff();
+      item.EA -= 1;
+      beverage.beverageOutlet.push(item.name);
+      itemToOutlet();
+      if (money.hasPaper) {
+        money.savePaper();
       }
-      showResultPopup(`${item.name}을(를) 획득했다!`);
-      // 금액차감
-      // 구매 LED
-      // TODOTODOTODOTO
-      vdmController.vdmController.currentMoney -= this.beverages.filter(
-        (item) => item.idx == itemIndex
-      ).price;
-
-      LED.noItemLEDsOnOff();
+      if (item.EA == 0) {
+        LED.noItemLEDColorOn();
+      }
+      vdmController.vdmController.currentMoney -= item.price;
+      vdmController.render();
+      LED.buyItemLEDColorOn();
     }
   },
 
-  getBeverage: function getBeverage() {},
+  getBeverage: function getBeverage(list) {
+    const beverageList = list
+      .trim()
+      .replace(/-------------------/g, " ")
+      .replace(/\n/g, "")
+      .split(" ");
+    //alert
+    beverageList.pop();
+    alert(`${beverageList}을 회수합니다.`);
+    console.log(beverageList);
+  },
 };
 
 const addItemToRack = () => {
@@ -48,7 +58,7 @@ const addItemToRack = () => {
 
     rackElement.appendChild(itemElement);
     if (item.EA == 0) {
-      // 품절버튼 ON
+      // LED.LED
     }
   });
 };
@@ -59,7 +69,7 @@ const createElement = (name, index, onClickItem) => {
   const noitemElement = document.createElement("div");
 
   buyButton.innerText = "구매";
-  buyButton.classList.add("button");
+  buyButton.classList.add("buyitem");
   buyButton.setAttribute("data-index", index);
   buyButton.addEventListener("click", onClickItem);
 
@@ -68,7 +78,7 @@ const createElement = (name, index, onClickItem) => {
   noitemElement.setAttribute("data-index", index);
 
   element.innerHTML = name;
-  element.classList.add("button");
+  element.classList.add("items");
   element.appendChild(buyButton);
   element.appendChild(noitemElement);
   element.setAttribute("data-index", index);
@@ -79,8 +89,34 @@ const createElement = (name, index, onClickItem) => {
 const onClickItem = (event) => {
   const targetElement = event.target;
   const itemIndex = targetElement.getAttribute("data-index");
-
+  if (
+    vdmController.vdmController.currentMoney <
+    beverage.beverages[itemIndex].price
+  ) {
+    alert("금액을 부족합니다!");
+    console.log("금액을 부족합니다!");
+    return 0;
+  }
   beverage.buyBeverageBtn(itemIndex);
 };
+
+const itemToOutlet = () => {
+  const outletElement = document.querySelector("#beverage-outlet");
+  beverage.beverageOutlet.forEach((item) => {
+    outletElement.value += `${item}\n-------------------\n`;
+  });
+  beverage.beverageOutlet = [];
+};
+
+const getBaseElement = document.querySelector("#get-beverage");
+
+const onClickGetBeverage = () => {
+  const beverageElementList = document.querySelector("#beverage-outlet");
+  const getBeverageList = beverageElementList.value;
+  beverage.getBeverage(getBeverageList);
+  beverageElementList.value = "";
+};
+
+getBaseElement.addEventListener("click", onClickGetBeverage);
 
 addItemToRack();
