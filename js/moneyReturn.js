@@ -15,19 +15,8 @@ export const moneyReturn = {
       vdmController.vdmController.returnMoneys.push(returnPaper);
       vdmController.vdmController.currentMoney = currentMoney;
       vdmController.render();
-      // console.log("1 : " + money.money.hasPaper);
       money.money.hasPaper = false;
-      // console.log("2 : " + money.money.hasPaper);
     }
-    // else if (!beverage.beverage.isServiced) {
-    //   console.log("asdad");
-    //   let returnPaper = 1000;
-    //   currentMoney -= returnPaper;
-    //   vdmController.render();
-    //   vdmController.vdmController.returnMoneys.push(returnPaper);
-    //   vdmController.vdmController.currentMoney = currentMoney;
-    //   vdmController.render();
-    // }
 
     // 동전 반환
     // 순차반환
@@ -105,10 +94,21 @@ resultBaseElement.addEventListener("click", onClickMoneyReturn);
 
 const moneyReternToOutlet = () => {
   const outletElement = document.querySelector("#money-outlet");
-  outletElement.append(`-------------------\n`);
   vdmController.vdmController.returnMoneys.reverse().forEach((returnMoney) => {
-    outletElement.append(`${returnMoney}\n`);
+    outletElement.value += `${returnMoney}\n-------------------\n`;
   });
 
   vdmController.vdmController.returnMoneys = [];
 };
+const getMoneyBtn = document.querySelector("#get-money");
+
+const onClickGetMoney = () => {
+  const returnMoneyElements = document.querySelector("#money-outlet");
+  if (returnMoneyElements.value == "") {
+    alert("반환 금액이 없습니다.");
+  } else {
+    returnMoneyElements.value = "";
+    alert("반환 금액 회수하겠습니다.");
+  }
+};
+getMoneyBtn.addEventListener("click", onClickGetMoney);

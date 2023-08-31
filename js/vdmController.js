@@ -4,11 +4,9 @@ import { money } from "./money.js";
 
 //vdm004
 export const vdmController = {
-  inputMAX: 9990,
-  boxMAX: 100,
   inputMoney: 0,
-  currentMoney: 0,
   isServiced: false,
+  currentMoney: 0,
   returnMoneys: [],
   //초기화
   init: function init() {

@@ -5,7 +5,7 @@ import * as LED from "./LED.js";
 //money
 // const index = prompt("enter the index");
 export const money = {
-  eachAmountOfMoneys: [99, 0, 40, 50, 0],
+  eachAmountOfMoneys: [99, 1, 10, 95, 98],
   moneyVALUE: [10, 50, 100, 500, 1000],
   inputMoney: 0,
   hasPaper: false,
@@ -53,7 +53,9 @@ export const money = {
       });
     } else {
       moneyReturn.moneyReturn.inputMoneyReturn(inputMoney);
-      alert("최대 투입 금액은 9990원입니다.");
+      alert(
+        "최대 투입 금액은 9990원입니다.\n마지막 투입 금액을 반환하겠습니다."
+      );
     }
     inputMoney = 0;
     console.log(this.hasPaper);

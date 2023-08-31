@@ -173,3 +173,22 @@ letter-spacing: 2px;
 50%{opacity: .5;}
 100%{opacity: 1;}
 }
+.get-money:active{
+  transform: scale(1.5);
+}
+.get-money:hover{
+letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f8e6e0;
+    color: #2e2c2c;
+}
+.get-money{
+    border-radius: 10px;
+
+  background-color: #f8e6e0;
+    color: #2e2c2c;
+  border: 3px solid #f8e6e0;
+    color: #2e2c2c;
+    
+}

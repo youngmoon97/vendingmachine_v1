@@ -32,17 +32,10 @@ export const beverage = {
       EA: 4,
       pic: "../image/water.jpg",
     },
-    // {
-    //   idx: 4,
-    //   name: "cyder",
-    //   price: "700",
-    //   EA: 4,
-    //   pic: "../image/cyder.jpg",
-    // },
   ],
 
   beverageOutlet: [],
-
+  isServiced: false,
   buyBeverageBtn: function buyBeverageBtn(itemIndex) {
     const item = this.beverages[itemIndex];
     if (LED.LED.noItemLEDs[itemIndex] == true) {
@@ -53,12 +46,14 @@ export const beverage = {
       beverage.beverageOutlet.push(item.name);
       alert(`${item.name}을 구매하였습니다.\n음료반환구를 확인해주세요!`);
       itemToOutlet();
+
       if (money.hasPaper) {
         money.savePaper();
       }
       if (item.EA == 0) {
         LED.noItemLEDColorOn();
       }
+      this.isServiced = true;
       vdmController.vdmController.currentMoney -= item.price;
       vdmController.render();
       LED.buyItemLEDColorOn();
