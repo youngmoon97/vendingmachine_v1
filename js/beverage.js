@@ -8,28 +8,28 @@ export const beverage = {
       idx: 0,
       name: "Coke",
       price: "1500",
-      EA: 10,
+      EA: 8,
       pic: "../image/coke.jpg",
     },
     {
       idx: 1,
       name: "Coffee",
       price: "3000",
-      EA: 0,
+      EA: 5,
       pic: "../image/coffee.jpg",
     },
     {
       idx: 2,
       name: "Tea",
       price: "2600",
-      EA: 2,
+      EA: 5,
       pic: "../image/tea.jpg",
     },
     {
       idx: 3,
       name: "Water",
       price: "260",
-      EA: 4,
+      EA: 10,
       pic: "../image/water.jpg",
     },
   ],
@@ -72,10 +72,8 @@ export const beverage = {
     if (beverageList.length === 0) {
       alert("회수할 음료가 없습니다.");
     } else {
-      alert(`${beverageList}을 회수합니다.`);
+      alert(`음료를 회수합니다.`);
     }
-
-    console.log(beverageList);
   },
 };
 

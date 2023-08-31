@@ -5,7 +5,6 @@ import { money } from "./money.js";
 //vdm004
 export const vdmController = {
   inputMoney: 0,
-  isServiced: false,
   currentMoney: 0,
   returnMoneys: [],
   //초기화

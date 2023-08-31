@@ -95,9 +95,9 @@ resultBaseElement.addEventListener("click", onClickMoneyReturn);
 const moneyReternToOutlet = () => {
   const outletElement = document.querySelector("#money-outlet");
   vdmController.vdmController.returnMoneys.reverse().forEach((returnMoney) => {
-    outletElement.value += `${returnMoney}\n-------------------\n`;
+    outletElement.value += `${returnMoney}\n`;
   });
-
+  outletElement.value += `-------------------\n`;
   vdmController.vdmController.returnMoneys = [];
 };
 const getMoneyBtn = document.querySelector("#get-money");
