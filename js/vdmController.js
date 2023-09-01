@@ -1,6 +1,5 @@
 import * as moneyReturn from "./moneyReturn.js";
 import * as LED from "./LED.js";
-import { money } from "./money.js";
 
 //vdm004
 export const vdmController = {
@@ -14,7 +13,6 @@ export const vdmController = {
     LED.LED.fullMoneyLEDsOnOff();
     LED.LED.buyLedsOnOff();
     LED.LED.noItemLEDsOnOff();
-    console.log("init");
   },
   //투입 금액 계산
   moneyAdd: function moneyAdd(inputMoney) {
@@ -36,6 +34,7 @@ export const vdmController = {
     }
   },
 };
+
 export const render = () => {
   document.querySelector("#current-money").innerHTML =
     vdmController.currentMoney.toString();

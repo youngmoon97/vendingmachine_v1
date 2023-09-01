@@ -36,6 +36,7 @@ div#current-money {
   border-radius: 10px;
   background-color: #fff;
 }
+
 .button{
     text-align: center;
     border-width: 1px;
@@ -48,6 +49,7 @@ div#current-money {
 .textarea{
     height: 150px;
 }
+
 .panel.outlet{
   padding: 10px;
   border: 1px solid #000;
@@ -56,6 +58,7 @@ div#current-money {
   height: 200px;
   resize: none;
 }
+
 .popup {
   position: absolute;
   top: 0;
@@ -69,21 +72,27 @@ div#current-money {
 .popup>.panel {
   padding: 30px;
 }
+
 .hide {
   display: none;
 }
+
 .panel .money-box{
   padding: 20px;
   display: flex;
 }
+
 .items{
+  padding: 10px;
   border-radius: 10px;
   border-style: double;
   text-align: center;
 }
+
 .buyitem{
-    border-radius: 10px;
+  border-radius: 10px;
   border-style: inherit;
+  font-weight: 800;
 }
 .buyitem:active{
  transform: scale(1.5);
@@ -95,10 +104,12 @@ div#current-money {
     background-color: #f8e6e0;
     color: #2e2c2c;
 }
+
 .noitem{
   border-style: inherit;
   animation: blink 2s linear infinite;
 }
+
 .money-value:active{
   transform: scale(1.5);
 }
@@ -117,6 +128,7 @@ padding: 5px;
   border: 3px solid #f8e6e0;
     color: #2e2c2c;
 }
+
 .money-return:active{
   transform: scale(1.5);
 }
@@ -129,17 +141,17 @@ letter-spacing: 2px;
 }
 .money-return{
     border-radius: 10px;
-
   background-color: #f8e6e0;
     color: #2e2c2c;
   border: 3px solid #f8e6e0;
     color: #2e2c2c;
 }
+
 .get-beverage:active{
   transform: scale(1.5);
 }
 .get-beverage:hover{
-letter-spacing: 2px;
+    letter-spacing: 2px;
     transform: scale(1.2);
     cursor: pointer;
     background-color: #f8e6e0;
@@ -147,17 +159,17 @@ letter-spacing: 2px;
 }
 .get-beverage{
     border-radius: 10px;
-
-  background-color: #f8e6e0;
+    background-color: #f8e6e0;
     color: #2e2c2c;
-  border: 3px solid #f8e6e0;
+    border: 3px solid #f8e6e0;
     color: #2e2c2c;
-    
 }
+
 .money-outlet{
   margin-top: 10%;
   margin-top: 10%;
 }
+
 .noleds{
   margin-bottom: 0px;
   margin-top: 0px;
@@ -165,7 +177,7 @@ letter-spacing: 2px;
 
 .fullleds{
   margin-bottom: 0px;
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 @keyframes blink{
@@ -173,6 +185,7 @@ letter-spacing: 2px;
 50%{opacity: .5;}
 100%{opacity: 1;}
 }
+
 .get-money:active{
   transform: scale(1.5);
 }
@@ -185,10 +198,8 @@ letter-spacing: 2px;
 }
 .get-money{
     border-radius: 10px;
-
-  background-color: #f8e6e0;
+    background-color: #f8e6e0;
     color: #2e2c2c;
-  border: 3px solid #f8e6e0;
-    color: #2e2c2c;
-    
-}
+    border: 3px solid #f8e6e0;
+    color: #2e2c2c;  
+  }

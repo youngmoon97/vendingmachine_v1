@@ -5,76 +5,98 @@ import * as beverage from "./beverage.js";
 //vdm003
 export const moneyReturn = {
   moneyreturnBtn: function moneyreturnBtn(currentMoney) {
-    // 지폐 있으면 반환
-    if (money.money.hasPaper) {
-      console.log("1 : " + money.money.hasPaper);
-      console.log("2 : " + !beverage.beverage.isServiced);
-      let returnPaper = 1000;
-      currentMoney -= returnPaper;
-      vdmController.render();
-      vdmController.vdmController.returnMoneys.push(returnPaper);
-      vdmController.vdmController.currentMoney = currentMoney;
-      vdmController.render();
-      money.money.hasPaper = false;
-    }
+    console.log(`currentMoney : ${currentMoney}`);
+    console.log(
+      `beverage.beverage.isServiced : ${beverage.beverage.isServiced}`
+    );
 
-    // 동전 반환
-    // 순차반환
-    let yesMoney = [];
-    // 있는 동전 확인
-    LED.LED.noMoneyLEDsOnOff();
-    LED.LED.noMoneyLEDs.forEach((element, index) => {
-      console.log(index);
-      if (element == false) {
-        yesMoney.push(money.money.moneyVALUE[index]);
-        console.log("yesmoney: " + yesMoney);
+    if (!beverage.beverage.isServiced) {
+      // 서비스 사용 안함
+      this.inputMoneyReturn(money.money.inputMoneyList);
+    } else {
+      // 지폐 있으면 반환
+      if (money.money.hasPaper) {
+        let returnPaper = 1000;
+        currentMoney -= returnPaper;
+        // vdmController.vdmController.returnMoneys.push(returnPaper);
+        vdmController.vdmController.currentMoney = currentMoney;
+        vdmController.render();
       }
-    });
-    yesMoney.reverse().forEach((element) => {
-      while (currentMoney >= element) {
-        let tempIndex;
-        switch (element) {
-          case 10:
-            tempIndex = 0;
-            break;
-          case 50:
-            tempIndex = 1;
-            break;
-          case 100:
-            tempIndex = 2;
-            break;
-          case 500:
-            tempIndex = 3;
-            break;
+      // 동전 반환
+      // 순차 반환
+      let yesMoney = [];
+      // 있는 동전 확인
+      LED.LED.noMoneyLEDsOnOff();
+      LED.LED.noMoneyLEDs.forEach((element, index) => {
+        if (element == false) {
+          yesMoney.push(money.money.moneyVALUE[index]);
         }
-        if (money.money.eachAmountOfMoneys[tempIndex] == 0) {
-          LED.noLEDColorOn();
-          break;
+      });
+      yesMoney.reverse().forEach((element) => {
+        while (currentMoney >= element) {
+          let tempIndex;
+          switch (element) {
+            case 10:
+              tempIndex = 0;
+              break;
+            case 50:
+              tempIndex = 1;
+              break;
+            case 100:
+              tempIndex = 2;
+              break;
+            case 500:
+              tempIndex = 3;
+              break;
+          }
+          if (money.money.eachAmountOfMoneys[tempIndex] == 0) {
+            LED.noLEDColorOn();
+            break;
+          }
+          currentMoney -= element;
+          money.money.moneyVALUE.forEach((eachMoney, index) => {
+            if (eachMoney == element) {
+              money.money.eachAmountOfMoneys[index] -= 1;
+            }
+          });
+          vdmController.vdmController.currentMoney = currentMoney;
+          vdmController.render();
+          vdmController.vdmController.returnMoneys.push(element); //반환구 전해줘야함
+          console.log(`element : ${element}`);
         }
-        currentMoney -= element;
+      });
+      moneyReternToOutlet();
+    }
+    money.money.hasPaper = false;
+    money.money.inputMoneyList = [];
+    beverage.beverage.isServiced = false;
+    LED.buyItemLEDColorOn();
+    LED.noLEDColorOn();
+    LED.fullLEDColorOn();
+  },
+
+  // 투입 금액 반환
+  inputMoneyReturn: function inputMoneyReturn(inputMoney) {
+    if (typeof inputMoney == "number") {
+      vdmController.vdmController.returnMoneys.push(inputMoney);
+    } else if (typeof inputMoney == "object") {
+      inputMoney.forEach((element) => {
+        vdmController.vdmController.returnMoneys.push(element);
+
+        vdmController.vdmController.currentMoney -= element;
         money.money.moneyVALUE.forEach((eachMoney, index) => {
           if (eachMoney == element) {
             money.money.eachAmountOfMoneys[index] -= 1;
           }
         });
-        vdmController.vdmController.currentMoney = currentMoney;
         vdmController.render();
-        vdmController.vdmController.returnMoneys.push(element); //반환구 전해줘야함
-      }
-    });
+      });
+    }
+    moneyReternToOutlet();
     LED.buyItemLEDColorOn();
     LED.noLEDColorOn();
     LED.fullLEDColorOn();
-    moneyReternToOutlet();
-  },
 
-  // 투입 금액 반환
-  inputMoneyReturn: function inputMoneyReturn(inputMoney) {
-    vdmController.vdmController.returnMoneys.push(inputMoney);
-    moneyReternToOutlet();
-    LED.buyItemLEDColorOn();
-    LED.noLEDColorOn();
-    LED.fullLEDColorOn();
     // 금액반환구에 표시
   },
 };
@@ -93,8 +115,10 @@ const onClickMoneyReturn = () => {
 resultBaseElement.addEventListener("click", onClickMoneyReturn);
 
 const moneyReternToOutlet = () => {
+  console.log("??");
   const outletElement = document.querySelector("#money-outlet");
   vdmController.vdmController.returnMoneys.reverse().forEach((returnMoney) => {
+    console.log(`returnMoney : ${returnMoney}`);
     outletElement.value += `${returnMoney}\n`;
   });
   outletElement.value += `-------------------\n`;

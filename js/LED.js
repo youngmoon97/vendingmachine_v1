@@ -61,6 +61,7 @@ export const noLEDColorOn = () => {
     }
   });
 };
+
 export const fullLEDColorOn = () => {
   LED.fullMoneyLEDsOnOff();
   const fullLEDElements = document.querySelectorAll(".fullleds");
@@ -76,6 +77,7 @@ export const fullLEDColorOn = () => {
     }
   });
 };
+
 export const noItemLEDColorOn = () => {
   LED.noItemLEDsOnOff();
   const noitemLEDElements = document.querySelectorAll(".noitem");
@@ -87,7 +89,6 @@ export const noItemLEDColorOn = () => {
       element.getAttribute("data-index") == index
     ) {
       element.style.color = "red";
-      element.style.fontWeight = 1000;
       element.style.display = "block";
       itemsElements.forEach((item) => {
         if (
@@ -117,14 +118,14 @@ export const buyItemLEDColorOn = () => {
   buyitemLEDElements.forEach((element, index) => {
     element.style.color = "black";
     element.style.setProperty("animation", "");
+    element.style.setProperty("pointer-events", "none");
     if (
       LED.buyLEDs[index] == true &&
       element.getAttribute("data-index") == index
     ) {
       if (LED.noItemLEDs[index] == false) {
         element.style.color = "blue";
-        element.style.fontWeight = 1000;
-        element.style.setProperty("animation", "blink 1s step-end infinite");
+        element.style.setProperty("animation", "blink 1s linear infinite");
       }
     }
   });
@@ -133,3 +134,4 @@ export const buyItemLEDColorOn = () => {
 noLEDColorOn();
 fullLEDColorOn();
 noItemLEDColorOn();
+buyitemLEDElements.style.setProperty("pointer-events", "none");

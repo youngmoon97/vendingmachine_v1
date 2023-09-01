@@ -28,7 +28,7 @@ export const beverage = {
     {
       idx: 3,
       name: "Water",
-      price: "260",
+      price: "280",
       EA: 10,
       pic: "../image/water.jpg",
     },
@@ -40,7 +40,6 @@ export const beverage = {
     const item = this.beverages[itemIndex];
     if (LED.LED.noItemLEDs[itemIndex] == true) {
       alert("품절되어 구매할 수 없습니다.");
-      console.log("품절되어 구매할 수 없습니다.");
     } else {
       item.EA -= 1;
       beverage.beverageOutlet.push(item.name);
@@ -68,7 +67,6 @@ export const beverage = {
       .split(" ");
     //alert
     beverageList.pop();
-    console.log(beverageList);
     if (beverageList.length === 0) {
       alert("회수할 음료가 없습니다.");
     } else {
@@ -137,7 +135,6 @@ const onClickItem = (event) => {
     beverage.beverages[itemIndex].price
   ) {
     alert("금액이 부족합니다!");
-    console.log("금액이 부족합니다!");
     return 0;
   }
   beverage.buyBeverageBtn(itemIndex);
