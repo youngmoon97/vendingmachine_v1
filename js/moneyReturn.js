@@ -11,6 +11,7 @@ export const moneyReturn = {
     );
 
     if (!beverage.beverage.isServiced) {
+      console.log("TEST : " + money.money.inputMoneyList);
       // 서비스 사용 안함
       this.inputMoneyReturn(money.money.inputMoneyList);
     } else {
@@ -18,6 +19,7 @@ export const moneyReturn = {
       if (money.money.hasPaper) {
         let returnPaper = 1000;
         currentMoney -= returnPaper;
+        vdmController.vdmController.returnMoneys.push(returnPaper);
         // vdmController.vdmController.returnMoneys.push(returnPaper);
         vdmController.vdmController.currentMoney = currentMoney;
         vdmController.render();
@@ -69,7 +71,6 @@ export const moneyReturn = {
     }
     money.money.hasPaper = false;
     money.money.inputMoneyList = [];
-    beverage.beverage.isServiced = false;
     LED.buyItemLEDColorOn();
     LED.noLEDColorOn();
     LED.fullLEDColorOn();

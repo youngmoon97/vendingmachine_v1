@@ -7,28 +7,28 @@ export const beverage = {
     {
       idx: 0,
       name: "Coke",
-      price: "1500",
+      price: 1500,
       EA: 8,
       pic: "../image/coke.jpg",
     },
     {
       idx: 1,
       name: "Coffee",
-      price: "3000",
+      price: 3000,
       EA: 5,
       pic: "../image/coffee.jpg",
     },
     {
       idx: 2,
       name: "Tea",
-      price: "2600",
+      price: 2600,
       EA: 5,
       pic: "../image/tea.jpg",
     },
     {
       idx: 3,
       name: "Water",
-      price: "280",
+      price: 280,
       EA: 10,
       pic: "../image/water.jpg",
     },
@@ -52,6 +52,7 @@ export const beverage = {
       if (item.EA == 0) {
         LED.noItemLEDColorOn();
       }
+
       this.isServiced = true;
       vdmController.vdmController.currentMoney -= item.price;
       vdmController.render();
@@ -130,6 +131,7 @@ const createElement = (pic, name, price, index, onClickItem) => {
 const onClickItem = (event) => {
   const targetElement = event.target;
   const itemIndex = targetElement.getAttribute("data-index");
+
   if (
     vdmController.vdmController.currentMoney <
     beverage.beverages[itemIndex].price

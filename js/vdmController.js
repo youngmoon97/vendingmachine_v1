@@ -1,5 +1,6 @@
 import * as moneyReturn from "./moneyReturn.js";
 import * as LED from "./LED.js";
+import { beverage } from "./beverage.js";
 
 //vdm004
 export const vdmController = {
@@ -7,13 +8,15 @@ export const vdmController = {
   currentMoney: 0,
   returnMoneys: [],
   //초기화
-  init: function init() {
-    vdmController.currentMoney = 0;
-    LED.LED.noMoneyLEDsOnOff();
-    LED.LED.fullMoneyLEDsOnOff();
-    LED.LED.buyLedsOnOff();
-    LED.LED.noItemLEDsOnOff();
-  },
+  // init: function init() {
+  //   beverage.isServiced = false;
+  //   beverage.beverageOutlet = [];
+  //   money.hasPaper = false;
+  //   LED.LED.noMoneyLEDsOnOff();
+  //   LED.LED.fullMoneyLEDsOnOff();
+  //   LED.LED.buyLedsOnOff();
+  //   LED.LED.noItemLEDsOnOff();
+  // },
   //투입 금액 계산
   moneyAdd: function moneyAdd(inputMoney) {
     let tempMoney = this.currentMoney + inputMoney;

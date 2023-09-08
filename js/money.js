@@ -25,6 +25,7 @@ export const money = {
 
               return 0;
             } else {
+              console.log("hasd");
               this.hasPaper = true;
             }
           }
@@ -51,12 +52,10 @@ export const money = {
         }
       });
     } else {
-      // if (!this.hasPaper) {
-      //   moneyReturn.moneyReturn.inputMoneyReturn(inputMoney);
-      // }
       alert(
         "최대 투입 금액은 9990원입니다.\n마지막 투입 금액을 반환하겠습니다."
       );
+      moneyReturn.moneyReturn.inputMoneyReturn(inputMoney);
     }
     inputMoney = 0;
   },

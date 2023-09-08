@@ -118,7 +118,7 @@ export const buyItemLEDColorOn = () => {
   buyitemLEDElements.forEach((element, index) => {
     element.style.color = "black";
     element.style.setProperty("animation", "");
-    element.style.setProperty("pointer-events", "none");
+
     if (
       LED.buyLEDs[index] == true &&
       element.getAttribute("data-index") == index
@@ -134,4 +134,3 @@ export const buyItemLEDColorOn = () => {
 noLEDColorOn();
 fullLEDColorOn();
 noItemLEDColorOn();
-buyitemLEDElements.style.setProperty("pointer-events", "none");
