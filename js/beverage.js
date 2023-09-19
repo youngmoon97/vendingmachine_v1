@@ -29,7 +29,7 @@ export const beverage = {
       idx: 3,
       name: "Water",
       price: 280,
-      EA: 10,
+      EA: 2,
       pic: "../image/water.jpg",
     },
   ],

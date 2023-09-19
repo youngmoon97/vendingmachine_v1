@@ -12,7 +12,10 @@ export const money = {
   inputMoneyList: [],
   //금액 투입
   insertMoneyBtn: function insertMoneyBtn(inputMoney) {
-    if (vdmController.vdmController.currentMoney + inputMoney <= 9990) {
+    if (
+      vdmController.vdmController.currentMoney + inputMoney <=
+      vdmController.vdmController.inputMAX
+    ) {
       this.moneyVALUE.forEach((value, index) => {
         if (value == inputMoney) {
           let whatCoin = index;

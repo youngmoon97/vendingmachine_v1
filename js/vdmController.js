@@ -4,9 +4,9 @@ import { beverage } from "./beverage.js";
 
 //vdm004
 export const vdmController = {
-  inputMoney: 0,
   currentMoney: 0,
   returnMoneys: [],
+  inputMAX: 9999,
   //초기화
   // init: function init() {
   //   beverage.isServiced = false;
